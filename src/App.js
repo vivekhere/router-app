@@ -16,11 +16,12 @@ class App extends Component {
         <NavBar />
         <div className="content">
           <Switch>
+            <Route path="/products/:id" component={ProductDetails} />
             <Route
               path="/products"
               render={(props) => <Products sortBy="newest" {...props} />}
             />
-            <Route path="/posts" component={Posts} />
+            <Route path="/posts/:year/:month" component={Posts} />
             <Route path="/admin" component={Dashboard} />
             <Route path="/" component={Home} />
           </Switch>
@@ -32,15 +33,21 @@ class App extends Component {
 
 export default App;
 
-// We know that the Route component passes 3 additional props to the component.
-// If you want to pass additional props to the component instead of the
-// component attribute we should use the render attribute.
-// We set this to an arrow function and return the Products component in which
-// we can pass any additional props like sortBy="newest".
-// But you won't have access to those 3 props.
-// To fix this problem we need to pass props as an argument and React will
-// automatically inject those props in the Products component.
-// Now, we need to pass all those props in addition to the customs props
-// using a special syntax in jsx { ...props }.
-// With this syntax all the properties of the props object will be listed just
-// like the custom props.
+// Route parameters
+
+// There are times when we need to pass parameters to our Routes.
+// eg. in the list of products depending on what product I select we should see
+// a different product id in the url. That's a route parameter.
+
+// How to pass and retrieve route parameter :
+// Define a new Route for the productsDetails page like this
+// <Route path="/products/:id" />
+// To define a parameter we need to prefix that parameter with a colon.
+
+// We can also define multiple parameters like this
+// <Route path="/posts/:year/:month" component={Posts} />
+
+// Now set the component for the Route like
+// <Route path="/products/:id" component={ProductDetails} />
+
+// Since this route is more specfic then the "/products" route we have put it first.
