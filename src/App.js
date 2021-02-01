@@ -29,4 +29,19 @@ class App extends Component {
 
 export default App;
 
-//
+// Route Props
+// The Route component passes the props history, location and match.
+// Essentially, the Route component is a wrapper around the component that we pass.
+// If the path matches, it will render the component and it will automatically
+// inject the 3 props history, location and match.
+
+// We use history prop to work with the history object in browser and with that
+// we can send the user to a different page.
+
+// location prop which represents where the app is now.
+
+// match prop which contains information about how this url match the path that
+// we set in our route.
+
+// To know more about their objects and properties visit:
+// https://reactrouter.com/web/api/
