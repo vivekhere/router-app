@@ -16,7 +16,10 @@ class App extends Component {
         <NavBar />
         <div className="content">
           <Switch>
-            <Route path="/products" component={Products} />
+            <Route
+              path="/products"
+              render={(props) => <Products sortBy="newest" {...props} />}
+            />
             <Route path="/posts" component={Posts} />
             <Route path="/admin" component={Dashboard} />
             <Route path="/" component={Home} />
@@ -29,19 +32,15 @@ class App extends Component {
 
 export default App;
 
-// Route Props
-// The Route component passes the props history, location and match.
-// Essentially, the Route component is a wrapper around the component that we pass.
-// If the path matches, it will render the component and it will automatically
-// inject the 3 props history, location and match.
-
-// We use history prop to work with the history object in browser and with that
-// we can send the user to a different page.
-
-// location prop which represents where the app is now.
-
-// match prop which contains information about how this url match the path that
-// we set in our route.
-
-// To know more about their objects and properties visit:
-// https://reactrouter.com/web/api/
+// We know that the Route component passes 3 additional props to the component.
+// If you want to pass additional props to the component instead of the
+// component attribute we should use the render attribute.
+// We set this to an arrow function and return the Products component in which
+// we can pass any additional props like sortBy="newest".
+// But you won't have access to those 3 props.
+// To fix this problem we need to pass props as an argument and React will
+// automatically inject those props in the Products component.
+// Now, we need to pass all those props in addition to the customs props
+// using a special syntax in jsx { ...props }.
+// With this syntax all the properties of the props object will be listed just
+// like the custom props.
