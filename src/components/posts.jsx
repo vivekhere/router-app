@@ -1,6 +1,10 @@
 import React from "react";
+import queryString from "query-string";
 
-const Posts = ({ match }) => {
+const Posts = ({ match, location }) => {
+  const result = queryString.parse(location.search);
+  console.log(result);
+
   return (
     <div>
       <h1>Posts</h1>
@@ -11,6 +15,8 @@ const Posts = ({ match }) => {
 
 export default Posts;
 
-// match has been destructured from the props object
-// match.params.year will get the year property from the url
-// match.params.month will get the month property from the url
+// import query-string
+// use the parse method and pass location.search as an argument
+// this will return an object.
+// The values generated after parsing the query string are always string. So if
+// we want to work with numbers or booleans we need to parse them accordingly.

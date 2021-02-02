@@ -33,18 +33,19 @@ class App extends Component {
 
 export default App;
 
-// Optional Parameters
+// Query String parameters
 
-// When we define parameters in our route by default those parameters are required.
-// In the posts path there are 2 parametes year and month.
-// If we do not specify anyone or both of the parameters like '/posts/2018' or
-// simply '/posts', the path will not match and hence it will continue the search
-// and eventually will match with the Home route and render the Home component.
+// Even though we learned how to define optional parameters, generally optional
+// parameters are something we need to avoid.
+// When we are dealing with optional parameters, instead of including them in the
+// Route we should include them in the query string.
+// Query String is somthing that we append to a url using '?'. Here, we can have
+// 0 or more parameters. eg. posts?sortBy=newest&approved=true
 
-// But suppose if we want to pass only one parameter and not all, in this case we
-// can the parameters optional.
-// To make the parameter optional, simply append a '?' to the parameters that you
-// want to be optional.
+// Query string parameters are in the location object. The search property in the
+// location object is our entire query string.
 
-// This is a part of regualr expression in js. In regular expressions or regex,
-// when we append a '?' that means that expression is optional.
+// Now, we do not want to manually read this string, parse it and extract it.
+// There is an npm package 'query-string' that does the job.
+
+// Install this package and let's go to the posts component.
