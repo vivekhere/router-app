@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import NavBar from "./components/navbar";
 import Products from "./components/products";
 import Posts from "./components/posts";
@@ -23,7 +23,10 @@ class App extends Component {
             />
             <Route path="/posts/:year?/:month?" component={Posts} />
             <Route path="/admin" component={Dashboard} />
-            <Route path="/" component={Home} />
+            <Redirect from="/messages" to="/posts" />
+            <Route path="/not-found" component={NotFound} />
+            <Route path="/" exact component={Home} />
+            <Redirect to="/not-found" />
           </Switch>
         </div>
       </div>
@@ -33,19 +36,27 @@ class App extends Component {
 
 export default App;
 
-// Query String parameters
+// Redirects
 
-// Even though we learned how to define optional parameters, generally optional
-// parameters are something we need to avoid.
-// When we are dealing with optional parameters, instead of including them in the
-// Route we should include them in the query string.
-// Query String is somthing that we append to a url using '?'. Here, we can have
-// 0 or more parameters. eg. posts?sortBy=newest&approved=true
+// If we go to any invalid route like '/xyz', the home component will be rendered.
+// because the path '/xyz' will match with the path '/'.
+// But this is not the desired behaviour we want to redirect the user to a
+// not found page.
 
-// Query string parameters are in the location object. The search property in the
-// location object is our entire query string.
+// Apply the exact attribute to display the home page only when the user is at
+// the root of the website.
+// Now the Home component will not be rendered.
 
-// Now, we do not want to manually read this string, parse it and extract it.
-// There is an npm package 'query-string' that does the job.
+// But we want to redirect the user to a different url like '/not-found'
+// import Redirect component from the react-router-dom
+// With this component we can redirect the user to a different url.
+// At the end of the last Route add <Redirect to="/not-found" />
+// If we get to this point that means none of the Routes matched. The user will be
+// redirected to "/not-found" and to display a message to the user at this url,
+// we need to register a new route with this path and a component.
+// <Route path="/not-found" component={ NotFound} />
 
-// Install this package and let's go to the posts component.
+// Sometimes we want to move the resources in our url from one url to another route
+// we can use the Redirect component to achieve this.
+// eg. <Redirect from="/messages" to="/posts" /> if the use goes to '/messages' it
+// will automatically redirect to '/posts'.
