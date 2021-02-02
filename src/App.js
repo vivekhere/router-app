@@ -36,27 +36,20 @@ class App extends Component {
 
 export default App;
 
-// Redirects
+// Programmatic navigation
 
-// If we go to any invalid route like '/xyz', the home component will be rendered.
-// because the path '/xyz' will match with the path '/'.
-// But this is not the desired behaviour we want to redirect the user to a
-// not found page.
+// There are times when we want to redirect a user when they click a button or
+// submit a form.
+// For example - In the '/products' page we have 3 products. In one of the products,
+// we have a save button. When the user clicks this button we want to take the user
+// back to the products page.
+// This is called 'Programmatic navigtion'.
 
-// Apply the exact attribute to display the home page only when the user is at
-// the root of the website.
-// Now the Home component will not be rendered.
+// The history object has a bunch of usefull methods for navigation such as
+// - goBack(), goForward(), push(), replace(), etc.
+// The difference between the push and replace is that the push will add a new
+// address to the browser history so we can click the back button and go back to
+// where you were. But replace basically replaces the current address so you
+// will not have history.
 
-// But we want to redirect the user to a different url like '/not-found'
-// import Redirect component from the react-router-dom
-// With this component we can redirect the user to a different url.
-// At the end of the last Route add <Redirect to="/not-found" />
-// If we get to this point that means none of the Routes matched. The user will be
-// redirected to "/not-found" and to display a message to the user at this url,
-// we need to register a new route with this path and a component.
-// <Route path="/not-found" component={ NotFound} />
-
-// Sometimes we want to move the resources in our url from one url to another route
-// we can use the Redirect component to achieve this.
-// eg. <Redirect from="/messages" to="/posts" /> if the use goes to '/messages' it
-// will automatically redirect to '/posts'.
+// Now, to implement programmatic navigation let's go to our productDetails page.
