@@ -21,7 +21,7 @@ class App extends Component {
               path="/products"
               render={(props) => <Products sortBy="newest" {...props} />}
             />
-            <Route path="/posts/:year/:month" component={Posts} />
+            <Route path="/posts/:year?/:month?" component={Posts} />
             <Route path="/admin" component={Dashboard} />
             <Route path="/" component={Home} />
           </Switch>
@@ -33,21 +33,18 @@ class App extends Component {
 
 export default App;
 
-// Route parameters
+// Optional Parameters
 
-// There are times when we need to pass parameters to our Routes.
-// eg. in the list of products depending on what product I select we should see
-// a different product id in the url. That's a route parameter.
+// When we define parameters in our route by default those parameters are required.
+// In the posts path there are 2 parametes year and month.
+// If we do not specify anyone or both of the parameters like '/posts/2018' or
+// simply '/posts', the path will not match and hence it will continue the search
+// and eventually will match with the Home route and render the Home component.
 
-// How to pass and retrieve route parameter :
-// Define a new Route for the productsDetails page like this
-// <Route path="/products/:id" />
-// To define a parameter we need to prefix that parameter with a colon.
+// But suppose if we want to pass only one parameter and not all, in this case we
+// can the parameters optional.
+// To make the parameter optional, simply append a '?' to the parameters that you
+// want to be optional.
 
-// We can also define multiple parameters like this
-// <Route path="/posts/:year/:month" component={Posts} />
-
-// Now set the component for the Route like
-// <Route path="/products/:id" component={ProductDetails} />
-
-// Since this route is more specfic then the "/products" route we have put it first.
+// This is a part of regualr expression in js. In regular expressions or regex,
+// when we append a '?' that means that expression is optional.
